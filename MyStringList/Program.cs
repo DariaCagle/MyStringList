@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
 
 namespace MyList
 {
@@ -7,6 +8,7 @@ namespace MyList
     {
         static void Main(string[] args)
         {
+
             MyStackList shoppingList = new MyStackList();
             shoppingList.Push("Bread");
             shoppingList.Push("Butter");
@@ -19,20 +21,21 @@ namespace MyList
                 Console.WriteLine(item);
             }
             Console.WriteLine();
-            string header = shoppingList.Peek();
+            object header = shoppingList.Peek();
             Console.WriteLine(header);
 
             Console.WriteLine(shoppingList[3]);
+
         }
     }
 
     public class Node
     {
-        public Node(string data)
+        public Node(object data)
         {
             Data = data;
         }
-        public string Data { get; set; }
+        public object Data { get; set; }
 
         public Node Next { get; set; }
     }
@@ -42,16 +45,16 @@ namespace MyList
         Node head;
         int count;
 
-        public string this[int index]
+        public object this[int index]
         {
             get
             {
                 if (index >= Count)
-                    throw new InvalidOperationException("Unknown index");
+                    throw new IndexOutOfRangeException("Unknown index");
                 int i = 0;
                 foreach (var item in this)
                 {
-                    if (i == index) return item.ToString();
+                    if (i == index) return item;
                     i++;
                 }
                 return this[index];
@@ -68,23 +71,23 @@ namespace MyList
             get { return count; }
         }
 
-        public void Push(string item)
+        public void Push(object item)
         {
             Node node = new Node(item);
             node.Next = head;
             head = node;
             count++;
         }
-        public string Pop()
+        public object Pop()
         {
             if (IsEmpty)
                 throw new InvalidOperationException("Stack is emplty");
-            Node temp = head;
+            Node previous = head;
             head = head.Next;
             count--;
-            return temp.Data;
+            return previous.Data;
         }
-        public string Peek()
+        public object Peek()
         {
             if (IsEmpty)
                 throw new InvalidOperationException("Stack is empty");
