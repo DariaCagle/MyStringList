@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using System.CodeDom;
 
 namespace MyList
 {
@@ -32,7 +26,8 @@ namespace MyList
         }
     }
 
-    public class Node { 
+    public class Node
+    {
         public Node(string data)
         {
             Data = data;
@@ -54,7 +49,7 @@ namespace MyList
                 if (index >= Count)
                     throw new InvalidOperationException("Unknown index");
                 int i = 0;
-                foreach(var item in this)
+                foreach (var item in this)
                 {
                     if (i == index) return item.ToString();
                     i++;
