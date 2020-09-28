@@ -12,15 +12,20 @@ namespace MyStringList
         {
             get
             {
-                if (index >= Count)
+                if (index >= Count && index < 0)
                     throw new IndexOutOfRangeException("Unknown index");
                 int i = 0;
+                object result = null;
                 foreach (var item in this)
                 {
-                    if (i == index) return item;
+                    if (i == index) 
+                    { 
+                        result = item; 
+                        break; 
+                    }
                     i++;
                 }
-                return this[index];
+                return result;
             }
         }
 
